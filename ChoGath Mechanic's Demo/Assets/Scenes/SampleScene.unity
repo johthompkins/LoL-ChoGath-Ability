@@ -741,6 +741,7 @@ MonoBehaviour:
   circlePrefab: {fileID: 5035625011762399439, guid: f9c5c1b0d04ad0c42869c3b8c2b09047, type: 3}
   circleRadius: 4
   knockupForce: 5
+  cooldownTime: 5
   affectedLayers:
     serializedVersion: 2
     m_Bits: 8

@@ -12,6 +12,11 @@ public class AbilityController : MonoBehaviour
     // The force with which to knock up colliders in the circle
     public float knockupForce = 200f;
 
+    //The cooldown on when we can use the ability again
+    public float cooldownTime = 3f;
+
+    //this var tells us the time we can use the next ability at
+    private float nextUse = 0f;
     // The layer mask for colliders that can be affected by the ability
     public LayerMask affectedLayers;
     public LayerMask ground;
@@ -19,13 +24,38 @@ public class AbilityController : MonoBehaviour
     // The transform of the crosshair object
     public Transform crosshairTransform;
 
+    private void start()
+    {
+        nextUse = Time.time;
+    }
+
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isReady())
         {
+            AbilityUsed();
             StartCoroutine(Ability());
         }
         
+    }
+
+    private bool isReady()
+    {
+        if (nextUse <= Time.time)
+        {
+            Debug.Log("Ability Ready!");
+            return true;
+        }
+        else
+        {
+            Debug.Log("Ability Not Ready!");
+            return false;
+        }
+    }
+
+    private void AbilityUsed()
+    {
+        nextUse = Time.time + cooldownTime;
     }
 
     private IEnumerator Ability()
