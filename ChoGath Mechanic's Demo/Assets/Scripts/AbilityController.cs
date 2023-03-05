@@ -70,7 +70,7 @@ public class AbilityController : MonoBehaviour
         {
 
             // Instantiate the circle prefab at the hit point and set its scale to the circle radius
-            GameObject circle = Instantiate(circlePrefab, new Vector3(hit.point.x, hit.point.y - 0.06f, hit.point.z), Quaternion.identity);
+            GameObject circle = Instantiate(circlePrefab, new Vector3(hit.point.x, hit.point.y - 0.05f, hit.point.z), Quaternion.identity);
             circle.transform.localScale = new Vector3(circleRadius * 2f, 0.1f, circleRadius * 2f);
 
             // Get all colliders within the circle
@@ -80,7 +80,7 @@ public class AbilityController : MonoBehaviour
             // Apply knockup force to all colliders within the circle
             foreach (Collider collider in colliders)
             {
-                Rigidbody rb = collider.GetComponent<Rigidbody>();
+                Rigidbody rb = collider.transform.parent.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
                     rb.AddForce(Vector3.up * knockupForce, ForceMode.Impulse);
